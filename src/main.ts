@@ -12,6 +12,6 @@ async function bootstrap() {
 	app.use(helmet());
 	app.use(cors());
 
-	await app.listen(3000);
+	await app.listen(process.env.PORT || 3000);
 }
 bootstrap();
