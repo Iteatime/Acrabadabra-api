@@ -1,14 +1,33 @@
 import { Injectable } from "@nestjs/common";
 import { getCollection } from "../mongo";
+import { ObjectId } from "mongodb";
 
 @Injectable()
 export class MissionsService {
-	listByCreator(creatorId: string) {
-		return getCollection("missions")
+	async listByCreator(creatorId: string) {
+		const missions = await getCollection("missions")
 			.find({
 				creatorId,
 			})
 			.toArray();
+
+		missions.forEach((e) => {
+			e.id = e._id;
+			delete e._id;
+		});
+
+		return missions;
+	}
+
+	async getById(missionId: string) {
+		const mission = await getCollection("missions").findOne({
+			_id: new ObjectId(missionId),
+		});
+
+		mission.id = mission._id;
+		delete mission._id;
+
+		return mission;
 	}
 
 	create(dto: any) {

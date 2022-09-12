@@ -5,7 +5,12 @@ import { MissionsService } from "./missions.service";
 export class MissionsController {
 	constructor(private missions: MissionsService) {}
 
-	@Get("/:creatorId")
+	@Get("/:missionId")
+	getById(@Param("missionId") missionId: string) {
+		return this.missions.getById(missionId);
+	}
+
+	@Get("/creators/:creatorId")
 	listByCreator(@Param("creatorId") creatorId: string) {
 		return this.missions.listByCreator(creatorId);
 	}
