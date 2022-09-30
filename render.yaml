@@ -1,0 +1,43 @@
+services:
+  - type: web
+    env: node
+    name: acrabadabra-api-prod
+    region: frankfurt
+    branch: master
+    buildCommand: "yarn; yarn build"
+    startCommand: yarn start:prod
+    plan: free
+    envVars:
+      - fromGroup: iteatime
+      - key: MONGO_DB
+        value: acra_prod
+  - type: web
+    env: node
+    name: acrabadabra-api-staging
+    region: frankfurt
+    branch: master
+    buildCommand: "yarn; yarn build"
+    startCommand: yarn start:prod
+    plan: free
+    envVars:
+      - fromGroup: iteatime
+      - key: MONGO_DB
+        value: acra_staging
+  - type: web
+    env: node
+    name: acrabadabra-api-dev
+    region: frankfurt
+    branch: master
+    buildCommand: "yarn; yarn build"
+    startCommand: yarn start:prod
+    plan: free
+    envVars:
+      - fromGroup: iteatime
+      - key: MONGO_DB
+        value: acra_dev
+
+envVarGroups:
+  - name: iteatime
+    envVars:
+      - key: MONGO_URL
+        sync: false
