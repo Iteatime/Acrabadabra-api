@@ -33,4 +33,10 @@ export class MissionsService {
 	create(dto: any) {
 		return getCollection("missions").insertOne({ ...dto });
 	}
+
+	delete(missionId: string) {
+		return getCollection("missions").findOneAndDelete({
+			_id: new ObjectId(missionId),
+		});
+	}
 }
