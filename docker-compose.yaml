@@ -1,0 +1,14 @@
+version: "3"
+name: Acrabadabra
+
+services:
+    mongo:
+        image: mongo:5
+        volumes:
+            - mongodb:/data/db
+        ports:
+            - 27017:27017
+
+volumes:
+    mongodb:
+        driver: local
