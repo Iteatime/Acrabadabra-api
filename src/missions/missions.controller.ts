@@ -6,12 +6,13 @@ import {
 	Param,
 	Post,
 	Query,
+	Put
 } from "@nestjs/common";
 import { MissionsService } from "./missions.service";
 
 @Controller("missions")
 export class MissionsController {
-	constructor(private missions: MissionsService) {}
+	constructor(private missions: MissionsService) { }
 
 	@Get("/:missionId")
 	getById(@Param("missionId") missionId: string) {
@@ -26,6 +27,11 @@ export class MissionsController {
 	@Post()
 	create(@Body() dto: any) {
 		return this.missions.create(dto);
+	}
+
+	@Put("/:missionId")
+	update(@Param("missionId") missionId: string, @Body() dto: any) {
+		return this.missions.update(missionId, dto);
 	}
 
 	@Delete("/:missionId")
