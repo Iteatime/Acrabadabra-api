@@ -39,6 +39,7 @@ export class MissionsService {
 			_id: new ObjectId(missionId),
 		});
 	}
+
 	update(missionId: string, dto: any) {
 		return getCollection("missions").findOneAndUpdate(
 			{
